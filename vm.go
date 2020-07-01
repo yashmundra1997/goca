@@ -496,9 +496,9 @@ func (vmpool *VMPool) Accounting(filter, startTime, endTime int) error {
 //   a right boundary.
 // lastYear: Can be -1, in which case the time interval won't have a right
 //   boundary.
-func (vmpool *VMPool) Showback(filter, firstMonth, firstYear, lastMonth, lastYear int) error {
-	_, err := client.Call("one.vmpool.showback", filter, firstMonth, firstYear, lastMonth, lastYear)
-	return err
+func (vmpool *VMPool) Showback(filter, firstMonth, firstYear, lastMonth, lastYear int) (string,error) {
+	response, err := client.Call("one.vmpool.showback", filter, firstMonth, firstYear, lastMonth, lastYear)
+	return response.Body(),err
 }
 
 // CalculateShowback processes all the history records, and stores the monthly cost for each VM
